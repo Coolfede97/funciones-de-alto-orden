@@ -34,7 +34,7 @@ public class Script : MonoBehaviour
                 else return list[list.IndexOf(letra) + clave];
             }
         }
-        return letra;
+        return ' ';
     }
     private char descifrar(char letra, int clavePar)
     {
@@ -47,6 +47,6 @@ public class Script : MonoBehaviour
                 else return list[list.IndexOf(letra) - clavePar];
             }
         }
-        return letra;
+        return ' ';
     }
 }
