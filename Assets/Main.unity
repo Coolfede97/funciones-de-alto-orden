@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22e2806f4c3255d44841496896318e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clave: 1
+  clave: 11
   palabraACifrar: Hola
   palabraCifrada: 
   palabraDescifrada: 

@@ -25,26 +25,32 @@ public class Script : MonoBehaviour
 
     private char cifrar(char letra, int clavePar)
     {
+        float timer=0;
         List<char> list = abecedario.ToList();
         if (abecedario.Contains(letra))
         {
-            while (true)
+            clavePar%=27;
+            while (timer<40)
             {
                 if (list.IndexOf(letra) + clave > 26) clavePar -= 26;
                 else return list[list.IndexOf(letra) + clave];
+                timer+=Time.deltaTime;
             }
         }
         return ' ';
     }
     private char descifrar(char letra, int clavePar)
     {
+        float timer=0;
         List<char> list = abecedario.ToList();
         if (abecedario.Contains(letra))
         {
-            while (true)
+            clavePar%=27;
+            while (timer<4)
             {
                 if (list.IndexOf(letra) - clavePar < 0) clavePar -= 26;
                 else return list[list.IndexOf(letra) - clavePar];
+                timer+=Time.deltaTime;
             }
         }
         return ' ';
