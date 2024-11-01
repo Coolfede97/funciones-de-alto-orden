@@ -20,7 +20,7 @@ public class Script : MonoBehaviour
         //}
         palabraACifrar=palabraACifrar.ToLower();
         palabraCifrada = new string(palabraACifrar.Select(c => cifrar(c, clave)).ToArray());
-        palabraDescifrada = new string(palabraCifrada.Select(c => descifrar(c, clave)).ToArray());
+        // palabraDescifrada = new string(palabraCifrada.Select(c => descifrar(c, clave)).ToArray());
     }
 
     private char cifrar(char letra, int clavePar)
