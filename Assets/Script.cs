@@ -3,28 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
+using TMPro;
+using UnityEngine.UI;
 public class Script : MonoBehaviour
 {
-    public int clave;
-    public string palabraACifrar;
-    public string palabraCifrada;
-    public string palabraDescifrada;
-    
+    public TMP_InputField palabraInput;
+    public TMP_InputField claveInput;
+    public TextMeshProUGUI palabraFinal;
     private char[] abecedario = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-    void Start()
+    
+    public void CifrarPalabra()
     {
-        //foreach (char letra in letras)
-        //{
-        //    Debug.Log(letra);
-        //}
-        palabraACifrar=palabraACifrar.ToLower();
-        palabraCifrada = new string(palabraACifrar.Select(c => cifrar(c, clave)).ToArray());
-        palabraDescifrada = new string(palabraCifrada.Select(c => descifrar(c, clave)).ToArray());
+        string palabraACifrar = palabraInput.text;
+        int clave = int.Parse(claveInput.text);
+        claveInput.text = "";
+        palabraInput.text = "";
+        palabraACifrar = palabraACifrar.ToLower();
+        string palabraCifrada = new string(palabraACifrar.Select(c => cifrar(c, clave)).ToArray());
+        palabraFinal.text = palabraCifrada;
     }
-
+    public void DescifrarPalabra()
+    {
+        string palabraADescifrar = palabraInput.text;
+        int clave = int.Parse(claveInput.text);
+        claveInput.text = "";
+        palabraInput.text = "";
+        palabraADescifrar = palabraADescifrar.ToLower();
+        string palabraDescifrada = new string(palabraADescifrar.Select(c => descifrar(c, clave)).ToArray());
+        palabraFinal.text = palabraDescifrada;
+    }
     private char cifrar(char letra, int clavePar)
     {
+        if (clavePar<0) return descifrar(letra, -clavePar);
         List<char> list = abecedario.ToList();
         if (abecedario.Contains(letra))
         {
@@ -36,11 +46,14 @@ public class Script : MonoBehaviour
     }
     private char descifrar(char letra, int clavePar)
     {
+        if (clavePar < 0) return cifrar(letra, -clavePar);
         List<char> list = abecedario.ToList();
         if (abecedario.Contains(letra))
         {
             clavePar%=27;
-            int indiceNuevo = (clavePar+list.IndexOf(letra))%26;
+            int indiceNuevo;
+            if (list.IndexOf(letra) - clavePar < 0) indiceNuevo = list.IndexOf(letra) - clavePar + 26;
+            else indiceNuevo = (list.IndexOf(letra)-clavePar);
             return list[indiceNuevo];
         }
         return ' ';
