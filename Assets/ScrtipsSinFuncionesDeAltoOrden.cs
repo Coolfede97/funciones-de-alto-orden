@@ -19,7 +19,13 @@ public class ScrtipsSinFuncionesDeAltoOrden : MonoBehaviour
         claveInput.text = "";
         palabraInput.text = "";
         palabraACifrar = palabraACifrar.ToLower();
-        string palabraCifrada = new string(palabraACifrar.Select(c => cifrar(c, clave)).ToArray());
+        string palabraCifrada = "";
+        foreach (char c in palabraACifrar)
+        {
+            palabraCifrada += cifrar(c,clave);
+            Debug.Log(palabraCifrada);
+            Debug.Log(c);
+        }
         palabraFinal.text = palabraCifrada;
     }
     public void DescifrarPalabra()
@@ -29,7 +35,11 @@ public class ScrtipsSinFuncionesDeAltoOrden : MonoBehaviour
         claveInput.text = "";
         palabraInput.text = "";
         palabraADescifrar = palabraADescifrar.ToLower();
-        string palabraDescifrada = new string(palabraADescifrar.Select(c => descifrar(c, clave)).ToArray());
+        string palabraDescifrada = "";
+        foreach (char c in palabraADescifrar)
+        {
+            palabraDescifrada += descifrar(c,clave);
+        }
         palabraFinal.text = palabraDescifrada;
     }
     private char cifrar(char letra, int clavePar)
